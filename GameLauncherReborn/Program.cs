@@ -25,6 +25,7 @@ namespace GameLauncherReborn {
 
                         Directory.SetCurrentDirectory(Path.GetDirectoryName(Application.ExecutablePath));
 
+                        ServicePointManager.Expect100Continue = true;
                         ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
                         Application.ThreadException += (sender, exception) => { ExceptionCapture((Exception)exception.Exception, "ThreadExceptionEventHandler"); };

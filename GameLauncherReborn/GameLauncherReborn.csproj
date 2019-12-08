@@ -61,6 +61,7 @@
     <Compile Include="Classes\ManagementObjects.cs" />
     <Compile Include="Classes\MBox.cs" />
     <Compile Include="Classes\Self.cs" />
+    <Compile Include="Events\WindowMoveEvent.cs" />
     <Compile Include="Forms\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,6 +95,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\mainbackground.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -10,6 +10,7 @@ using System.Net;
 namespace GameLauncherReborn.Classes {
     class AnticheatMessage {
         readonly Label label;
+        public static Boolean StopPinging = false;
         public AnticheatMessage(Label mainlabel) {
             label = mainlabel;
         }
@@ -17,11 +18,11 @@ namespace GameLauncherReborn.Classes {
         public void CallInvoke(String text, Color back) {
             if (label.InvokeRequired) {
                 label.Invoke(new Action(delegate () {
-                    label.Text = text;
+                    label.Text = "    [AC] " + text;
                     label.BackColor = back;
                 }));
             } else {
-                label.Text = text;
+                label.Text = "    " + text;
                 label.BackColor = back;
             }
         }
@@ -40,32 +41,35 @@ namespace GameLauncherReborn.Classes {
                     anticheat_data.DownloadStringAsync(new Uri("http://launcher.worldunited.gg/get_user_info.json"));
                     anticheat_data.DownloadStringCompleted += (sender, e) => {
                         if (e.Cancelled) {
-                            CallInvoke("    Failed to load data... retrying...", Color.Black);
+                            CallInvoke("Failed to load data... retrying...", Color.Black);
                         } else if (e.Error != null) {
-                            CallInvoke("    Failed to load data... retrying...", Color.Black);
+                            CallInvoke("Failed to load data... retrying...", Color.Black);
                         }
                         else {
                             SimpleJSON.JSONNode anticheat_results = SimpleJSON.JSON.Parse(e.Result);
                             int getStatus = Convert.ToInt32(anticheat_results["status"]?.ToString());
-                            switch(getStatus) {
+                            string LastKnownUsername = anticheat_results["lastknownusername"]?.ToString().Replace("\"", String.Empty);
+                            StopPinging = true;
+                            switch (getStatus) {
                                 case 1:
-                                    CallInvoke("    Ready.", Color.Green);
+                                    CallInvoke(String.Format("Ready... Set... Go {0}!", LastKnownUsername), Color.Green);
                                     break;
                                 case 2:
-                                    CallInvoke("    You are banned from official servers.", Color.DarkOrange);
+                                    CallInvoke(String.Format("{0}, You are banned from official servers.", LastKnownUsername), Color.DarkOrange);
                                     break;
                                 case 3:
-                                    CallInvoke("    You are banned from all servers.", Color.Red);
+                                    CallInvoke(String.Format("{0}, You are banned from all servers.", LastKnownUsername), Color.Red);
                                     break;
                                 default:
-                                    CallInvoke("    An error occurred reading system info.", Color.Blue);
+                                    CallInvoke("An error occurred reading system info.", Color.Blue);
+                                    StopPinging = false;
                                     break;
                             }
                         }
                     };
                 }
             } catch {
-                CallInvoke("    Failed to load data... retrying...", Color.Black);
+                CallInvoke("Failed to load data... retrying...", Color.Black);
             }
         }
     }
