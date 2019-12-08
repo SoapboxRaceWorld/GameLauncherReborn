@@ -52,10 +52,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\AnticheatMessage.cs" />
     <Compile Include="Classes\Hash\SHA.cs" />
     <Compile Include="Classes\HttpRequestHandler.cs" />
     <Compile Include="Classes\HWID.cs" />
     <Compile Include="Classes\IsRunning.cs" />
+    <Compile Include="Classes\ManagementObjects.cs" />
     <Compile Include="Classes\MBox.cs" />
     <Compile Include="Classes\Self.cs" />
     <Compile Include="Forms\MainWindow.cs">
@@ -79,6 +81,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include=".editorconfig" />
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
