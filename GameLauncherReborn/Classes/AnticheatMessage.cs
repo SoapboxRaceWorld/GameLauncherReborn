@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Net;
 
 namespace GameLauncherReborn.Classes {
     class AnticheatMessage {
@@ -13,23 +14,59 @@ namespace GameLauncherReborn.Classes {
             label = mainlabel;
         }
 
-        public void ShowMessage() {
-            Task.Factory.StartNew(() => {
-                var task = await HttpRequestHandler.RequestAsync("https://sbrw.io/getUserInformation");
-                Console.WriteLine(task.Result);
-            });
+        public void CallInvoke(String text, Color back) {
+            if (label.InvokeRequired) {
+                label.Invoke(new Action(delegate () {
+                    label.Text = text;
+                    label.BackColor = back;
+                }));
+            } else {
+                label.Text = text;
+                label.BackColor = back;
+            }
+        }
 
-            label.BackColor = Color.LightSkyBlue;
-            label.Text = "TEST";
-            label.AutoSize = false;
-            label.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
-            label.ForeColor = Color.White;
-            label.Location = new Point(0, 470);
-            label.Size = new Size(820, 30);
-            label.TabIndex = 0;
-            label.TextAlign = ContentAlignment.MiddleCenter;
-            label.Show();
-            label.Click += (object x, EventArgs y) => { label.Hide(); };
+        public void ShowMessage() {
+            try {
+                /* @TODO: Make use of HttpRequestHandler.RequestAsync() */
+                using(WebClient anticheat_data = new WebClient()) {
+                    anticheat_data.Headers["X-HWID"] = Self.LegacyHWID;
+                    anticheat_data.Headers["X-NewHWID"] = Self.HWID;
+                    anticheat_data.Headers["X-UserAgent"] = Self.XUserAgent;
+                    anticheat_data.Headers["X-GameLauncherHash"] = Self.ApplicationHash;
+                    anticheat_data.Headers["X-DiscordID"] = Self.DiscordID;
+
+                    anticheat_data.CancelAsync();
+                    anticheat_data.DownloadStringAsync(new Uri("http://launcher.worldunited.gg/get_user_info.json"));
+                    anticheat_data.DownloadStringCompleted += (sender, e) => {
+                        if (e.Cancelled) {
+                            CallInvoke("    Failed to load data... retrying...", Color.Black);
+                        } else if (e.Error != null) {
+                            CallInvoke("    Failed to load data... retrying...", Color.Black);
+                        }
+                        else {
+                            SimpleJSON.JSONNode anticheat_results = SimpleJSON.JSON.Parse(e.Result);
+                            int getStatus = Convert.ToInt32(anticheat_results["status"]?.ToString());
+                            switch(getStatus) {
+                                case 1:
+                                    CallInvoke("    Ready.", Color.Green);
+                                    break;
+                                case 2:
+                                    CallInvoke("    You are banned from official servers.", Color.DarkOrange);
+                                    break;
+                                case 3:
+                                    CallInvoke("    You are banned from all servers.", Color.Red);
+                                    break;
+                                default:
+                                    CallInvoke("    An error occurred reading system info.", Color.Blue);
+                                    break;
+                            }
+                        }
+                    };
+                }
+            } catch {
+                CallInvoke("    Failed to load data... retrying...", Color.Black);
+            }
         }
     }
 }

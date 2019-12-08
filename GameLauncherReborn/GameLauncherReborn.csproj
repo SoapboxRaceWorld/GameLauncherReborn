@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\3rdparty\SimpleJSON.cs" />
     <Compile Include="Classes\AnticheatMessage.cs" />
     <Compile Include="Classes\Hash\SHA.cs" />
     <Compile Include="Classes\HttpRequestHandler.cs" />
@@ -93,5 +94,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

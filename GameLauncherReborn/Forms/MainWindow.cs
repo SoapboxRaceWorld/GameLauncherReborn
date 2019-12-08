@@ -17,7 +17,14 @@ namespace GameLauncherReborn {
             InitializeComponent();
             Text = Text + " v"+ Application.ProductVersion + " | Build: " + Self.ApplicationHash.Substring(0, 8) + " | HWID: " + Self.HWID + " | GPU: " + ManagementObjects.getGPU;
 
-            new AnticheatMessage(AnticheatLabel).ShowMessage();
+            Thread startPinging = new Thread(() => {
+                while(true) { 
+                    new AnticheatMessage(AnticheatLabel).ShowMessage();
+                    Thread.Sleep(500);
+                }
+            }) { IsBackground = true };
+
+            startPinging.Start();
         }
     }
 }

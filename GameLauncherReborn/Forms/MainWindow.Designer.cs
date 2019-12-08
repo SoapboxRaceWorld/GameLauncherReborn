@@ -33,12 +33,15 @@
             // 
             // AnticheatLabel
             // 
-            this.AnticheatLabel.AutoSize = true;
-            this.AnticheatLabel.Location = new System.Drawing.Point(-2, 509);
+            this.AnticheatLabel.BackColor = System.Drawing.Color.Black;
+            this.AnticheatLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.AnticheatLabel.ForeColor = System.Drawing.Color.White;
+            this.AnticheatLabel.Location = new System.Drawing.Point(0, 470);
             this.AnticheatLabel.Name = "AnticheatLabel";
-            this.AnticheatLabel.Size = new System.Drawing.Size(35, 13);
+            this.AnticheatLabel.Size = new System.Drawing.Size(820, 30);
             this.AnticheatLabel.TabIndex = 0;
-            this.AnticheatLabel.Text = "label1";
+            this.AnticheatLabel.Text = "    Checking connection with AntiCheat System";
+            this.AnticheatLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // MainWindow
             // 
@@ -54,7 +57,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "GameLauncherReborn";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

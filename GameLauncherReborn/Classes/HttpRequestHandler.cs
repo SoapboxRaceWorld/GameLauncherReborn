@@ -20,7 +20,7 @@ namespace GameLauncherReborn.Classes {
             request.Headers["X-DiscordID"]          = Self.DiscordID;
             request.Timeout                         = 5000;
 
-            if(data.Count != 0) {
+            if(data != null) {
                 byte[] PostBytes = Encoding.ASCII.GetBytes(string.Join("&", data.Select(x => x.Key + "=" + x.Value).ToArray()));
 
                 request.Method = "POST";
