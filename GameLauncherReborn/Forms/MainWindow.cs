@@ -1,5 +1,7 @@
 ﻿using GameLauncherReborn.Classes;
 using GameLauncherReborn.Events;
+using GameLauncherReborn.Forms;
+using GameLauncherReborn.Panels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,8 +12,13 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
+using DiscordRPC;
+
 namespace GameLauncherReborn {
     public partial class MainWindow : Form {
+        public static DiscordRpcClient discordRpcClient;
+        private readonly RichPresence _presence = new RichPresence();
+
         public MainWindow(string[] args) {
             Self.args = args;
             Self.mainform = this;
@@ -33,6 +40,51 @@ namespace GameLauncherReborn {
             }) { IsBackground = true };
 
             startPinging.Start();
+            startWindow1.BringToFront();
         }
+
+        private void SettingsMenuBtn_Click(object sender, EventArgs e) {
+            commingSoon1.BringToFront();
+        }
+
+        private void MainMenuBtn_Click(object sender, EventArgs e) {
+            startWindow1.BringToFront();
+        }
+
+        private void AModNetSettingsBtn_Click(object sender, EventArgs e) {
+            commingSoon1.BringToFront();
+        }
+
+        private void VinylManSettingsBtn_Click(object sender, EventArgs e) {
+            commingSoon1.BringToFront();
+        }
+
+        private void MainWindow_Load(object sender, EventArgs e) {
+            discordRpcClient = new DiscordRpcClient(DiscordTokens.AppID);
+
+            discordRpcClient.OnReady += (x, y) => {
+                DiscordTokens.ID = y.User.ID.ToString();
+                DiscordTokens.Username = y.User.Username.ToString();
+                DiscordTokens.Discriminator = y.User.Username.ToString();
+                DiscordTokens.Avatar = y.User.Avatar.ToString();
+            };
+
+            discordRpcClient.OnError += (x, y) => {
+                MessageBox.Show($"Discord Error\n{y.Message}", y.Code.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+            };
+
+            _presence.State = "MainWindow";
+            _presence.Details = "In-Launcher: " + Application.ProductVersion;
+            _presence.Assets = new Assets {
+                LargeImageText = "SBRW",
+                LargeImageKey = "nfsw"
+            };
+            discordRpcClient.SetPresence(_presence);
+
+            discordRpcClient.Initialize();
+
+        }
+
+        //public string ServerName { get { return Lbl.Text; } set { Lbl.Text = value; } }
     }
 }

@@ -14,8 +14,12 @@ namespace GameLauncherReborn.Classes {
             return CheckMutex(Self.LauncherMutex);
         }
 
+        public static bool LegacyLauncherRunning() {
+            return CheckMutex(Self.LegacyLauncherMutex);
+        }
+
         public static bool AllRunning() {
-            return LauncherRunning() || GameRunning();
+            return LauncherRunning() || GameRunning() || LegacyLauncherRunning();
         }
 
         private static bool CheckMutex(String MutexID) {
@@ -26,7 +30,6 @@ namespace GameLauncherReborn.Classes {
                 return false;
             } finally {
                 if (mutex != null) {
-                    mutex.ReleaseMutex();
                     mutex.Close();
                 }
             }

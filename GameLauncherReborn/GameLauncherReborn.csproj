@@ -38,10 +38,17 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DiscordRPC">
+      <HintPath>D:\Gry\Need for Speed World\DiscordRPC.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\DiscordTokens.cs" />
     <Compile Include="Classes\3rdparty\SimpleJSON.cs" />
     <Compile Include="Classes\AnticheatMessage.cs" />
     <Compile Include="Classes\Hash\SHA.cs" />
@@ -68,10 +76,46 @@
     <Compile Include="Forms\MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ServerList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ServerList.Designer.cs">
+      <DependentUpon>ServerList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\AModNetSettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\AModNetSettings.Designer.cs">
+      <DependentUpon>AModNetSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\CommingSoon.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\CommingSoon.Designer.cs">
+      <DependentUpon>CommingSoon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\StartWindow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\StartWindow.Designer.cs">
+      <DependentUpon>StartWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ServerList.resx">
+      <DependentUpon>ServerList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\AModNetSettings.resx">
+      <DependentUpon>AModNetSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\CommingSoon.resx">
+      <DependentUpon>CommingSoon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\StartWindow.resx">
+      <DependentUpon>StartWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -97,6 +141,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\mainbackground.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\testclosebtn.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
