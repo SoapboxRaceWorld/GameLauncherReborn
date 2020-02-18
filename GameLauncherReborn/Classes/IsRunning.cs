@@ -19,7 +19,7 @@ namespace GameLauncherReborn.Classes {
         }
 
         public static bool AllRunning() {
-            return LauncherRunning() || GameRunning() || LegacyLauncherRunning();
+            return false; // LauncherRunning() || GameRunning() || LegacyLauncherRunning();
         }
 
         private static bool CheckMutex(String MutexID) {

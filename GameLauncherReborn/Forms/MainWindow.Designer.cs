@@ -108,7 +108,6 @@
             this.VinylManSettingsBtn.Size = new System.Drawing.Size(64, 64);
             this.VinylManSettingsBtn.TabIndex = 5;
             this.VinylManSettingsBtn.TabStop = false;
-            this.VinylManSettingsBtn.Click += new System.EventHandler(this.VinylManSettingsBtn_Click);
             // 
             // AModNetSettingsBtn
             // 
@@ -118,7 +117,6 @@
             this.AModNetSettingsBtn.Size = new System.Drawing.Size(64, 64);
             this.AModNetSettingsBtn.TabIndex = 4;
             this.AModNetSettingsBtn.TabStop = false;
-            this.AModNetSettingsBtn.Click += new System.EventHandler(this.AModNetSettingsBtn_Click);
             // 
             // SettingsMenuBtn
             // 
@@ -128,7 +126,6 @@
             this.SettingsMenuBtn.Size = new System.Drawing.Size(64, 64);
             this.SettingsMenuBtn.TabIndex = 3;
             this.SettingsMenuBtn.TabStop = false;
-            this.SettingsMenuBtn.Click += new System.EventHandler(this.SettingsMenuBtn_Click);
             // 
             // MainMenuBtn
             // 
@@ -138,7 +135,6 @@
             this.MainMenuBtn.Size = new System.Drawing.Size(64, 64);
             this.MainMenuBtn.TabIndex = 2;
             this.MainMenuBtn.TabStop = false;
-            this.MainMenuBtn.Click += new System.EventHandler(this.MainMenuBtn_Click);
             // 
             // MainWindow
             // 

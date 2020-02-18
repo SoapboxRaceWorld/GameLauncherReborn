@@ -1,7 +1,9 @@
 ﻿using GameLauncherReborn.Classes;
+using GameLauncherReborn.Classes.JSON;
 using GameLauncherReborn.Events;
 using GameLauncherReborn.Forms;
 using GameLauncherReborn.Panels;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -41,22 +43,11 @@ namespace GameLauncherReborn {
 
             startPinging.Start();
             startWindow1.BringToFront();
-        }
 
-        private void SettingsMenuBtn_Click(object sender, EventArgs e) {
-            commingSoon1.BringToFront();
-        }
-
-        private void MainMenuBtn_Click(object sender, EventArgs e) {
-            startWindow1.BringToFront();
-        }
-
-        private void AModNetSettingsBtn_Click(object sender, EventArgs e) {
-            commingSoon1.BringToFront();
-        }
-
-        private void VinylManSettingsBtn_Click(object sender, EventArgs e) {
-            commingSoon1.BringToFront();
+            MainMenuBtn.Click           += (handler, error) => { startWindow1.BringToFront(); };
+            VinylManSettingsBtn.Click   += (handler, error) => { commingSoon1.BringToFront(); };
+            AModNetSettingsBtn.Click    += (handler, error) => { commingSoon1.BringToFront(); };
+            SettingsMenuBtn.Click       += (handler, error) => { commingSoon1.BringToFront(); };
         }
 
         private void MainWindow_Load(object sender, EventArgs e) {
@@ -79,12 +70,11 @@ namespace GameLauncherReborn {
                 LargeImageText = "SBRW",
                 LargeImageKey = "nfsw"
             };
+
             discordRpcClient.SetPresence(_presence);
 
             discordRpcClient.Initialize();
 
         }
-
-        //public string ServerName { get { return Lbl.Text; } set { Lbl.Text = value; } }
     }
 }

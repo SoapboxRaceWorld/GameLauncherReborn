@@ -39,7 +39,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DiscordRPC">
-      <HintPath>D:\Gry\Need for Speed World\DiscordRPC.dll</HintPath>
+      <HintPath>..\..\GameLauncher_NFSW\GameLauncher\bin\Debug\DiscordRPC.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -66,6 +69,7 @@
     <Compile Include="Classes\HttpRequestHandler.cs" />
     <Compile Include="Classes\HWID.cs" />
     <Compile Include="Classes\IsRunning.cs" />
+    <Compile Include="Classes\JSON\ServerInformation.cs" />
     <Compile Include="Classes\ManagementObjects.cs" />
     <Compile Include="Classes\MBox.cs" />
     <Compile Include="Classes\Self.cs" />
@@ -129,6 +133,7 @@
     </Compile>
     <None Include=".editorconfig" />
     <None Include="app.config" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
